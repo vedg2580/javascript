@@ -88,3 +88,67 @@ function greet(name){
 
 parameter is what we have in function
 arguement is what value we supply at the time of calling the function
+
+
+if(condition){
+    // code to execute
+} esle if(condition){
+    // code to execute
+} else {
+    // code to execute
+}
+
+Switch case
+switch case compares values not expressions. remember that.
+so when you do
+function switchCaseDemo(a){
+    switch(a){
+        case 18:
+            console.log('UNDERAGE');
+            break;
+        case 25:
+            console.log('you are still young. hustle harder so you can chill later for the rest of your life in luxury');
+            break;
+        default:
+            console.log('good you hustled in your twenties now you can rest');
+            break;
+    }
+}
+
+switchCaseDemo(person.age);
+and age = 25 it checks a === 25 ? yes or no
+if you put expression say case a > 35 this will result into true and switch will interpret this as 25 === true which is false
+
+Taking input
+// this works only on browser
+let currentAge = prompt('Enter your current age');
+
+for taking input on node we have to do something different
+
+Arrays
+arrayName.push(element); // is used to push element into array
+arrayName.length; // gives the length of array
+const newArray = [1, 2, 3];
+when you try to do:
+newArray = [10, 20, 30]; // this will give an error
+but there is still a way to mutate the array by doing the following
+newArray[0] = 10;
+newArray[1] = 20;
+newArray[2] = 30;
+console.log(newArray); // doesn't throw any error now and the array is printed with new values
+
+Arrow Functions
+let result = (a, b) => {
+    return a+b;
+};
+
+function call
+console.log(result(24, 224));
+
+const integerArray = [1, -23, 22, 3, 45, -34, -3];
+// lets write a method to return an array of squares of all positive integers from integerArray
+const squareList = (arr) => {
+    return arr.filter(element => element > 0 && Number.isInteger(element)).map(element => element*element);
+}
+
+console.log(squareList(integerArray));
