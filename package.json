@@ -1,0 +1,24 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "This repository I will use to keep track of my JavaScript learnings.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vedg2580/javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vedg2580/javascript/issues"
+  },
+  "homepage": "https://github.com/vedg2580/javascript#readme",
+  "dependencies": {
+    "cowsay": "^1.6.0"
+  }
+}
