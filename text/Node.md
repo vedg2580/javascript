@@ -24,7 +24,6 @@ Real life analogy
 I created a toolbox with hammer in it.
 in app.js we say Bring me the hammer from toolbox. and then we use it.
 
-
 When we do
 npm init -y
 npm created a file named package.json
@@ -37,25 +36,25 @@ PS D:\Workspace\Programming Workspace\2026\JavaScript> npm init -y
 Wrote to D:\Workspace\Programming Workspace\2026\JavaScript\package.json:
 
 {
-  "name": "javascript",
-  "version": "1.0.0",
-  "description": "This repository I will use to keep track of my JavaScript learnings.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vedg2580/javascript.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/vedg2580/javascript/issues"
-  },
-  "homepage": "https://github.com/vedg2580/javascript#readme"
+"name": "javascript",
+"version": "1.0.0",
+"description": "This repository I will use to keep track of my JavaScript learnings.",
+"main": "index.js",
+"scripts": {
+"test": "echo \"Error: no test specified\" && exit 1"
+},
+"repository": {
+"type": "git",
+"url": "git+https://github.com/vedg2580/javascript.git"
+},
+"keywords": [],
+"author": "",
+"license": "ISC",
+"type": "commonjs",
+"bugs": {
+"url": "https://github.com/vedg2580/javascript/issues"
+},
+"homepage": "https://github.com/vedg2580/javascript#readme"
 }
 
 "name": "javascript"
@@ -67,13 +66,13 @@ This tells node 'This is the default entry file'
 If somebody imports your project (using require('my-project-name')), node will look at index.js
 
 "scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1"
+"test": "echo \"Error: no test specified\" && exit 1"
 }
 instead of typing: node app.js
 we can just do: 'npm start' OR 'npm run dev' using scripts
 
 "repository": {
-  ...
+...
 }
 has github information
 
@@ -88,3 +87,12 @@ when we do: `const add = require("./math");` This is called CommonJS. This is No
 Because: `"type": "commonjs"` node allows `require(...)` AND `module.exports`
 Later we'll learn `import` and `export` which is a newer sytem.
 
+npm install package-name
+This means download the cowsay package from npm, store it in node_modules, and record it in package.json so the project knows it depends on it.
+
+node_modules
+this folder contains all the packages required to run the project, inculding direct and indirect dependencies.
+
+`const add = require('./math');` means we have created a module locally and wish to use it.
+`const express = require('express');` means we have installed a package/module using npm and wish to use it. (generally stored in node_modules folder).
+so both the above operations are same, node is just looking in different places. (i.e. current folder vs node_modules)
