@@ -28,3 +28,7 @@ console.log(math.name);
 console.log(math.user);
 console.log(math.user.age);
 console.log(math.user.name);
+
+const cowsay = require('cowsay');
+console.log(cowsay.say({text: "Hello Ved"}));
+
