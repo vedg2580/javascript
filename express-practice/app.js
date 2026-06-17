@@ -1,6 +1,8 @@
 const express = require('express'); // importing express
 const app = express(); // creating a server object
 
+// GET
+
 app.get("/", (request, response) => {
     // console.log(request);
     response.send("Welcome");
@@ -105,6 +107,31 @@ app.get("/companies/:companyId", (req, res) => {
     }
     
     return res.json(company);
+});
+
+// POST PUT AND DELETE
+
+app.use(express.json());
+
+app.post("/jobs", (req, res) => {
+    console.log(req.body);
+
+    let newJob = {
+        "id": jobsArray.length,
+        "company": req.body.company,
+        "status": req.body.status
+    };
+
+    jobsArray.push(newJob);
+    res.json({"message": "Job Received"});
+});
+
+app.delete("/jobs/:id", (req, res) => {
+    res.json({"message": "Job Deleted"});
+});
+
+app.put("/jobs/:id", (req, res) => {
+    res.json({"message": "Record Updated"});
 });
 
 app.listen(3000, () => {
