@@ -2,10 +2,10 @@ Express.Router() is a modular, mountable route handler.
 Express Router lets you split routes into separate files.
 
 When the app grows:
-```javascript
-app.get("/users", ...)
-app.post("/users", ...)
-app.get("/users/:id", ...)
+    ```javascript
+    app.get("/users", ...)
+    app.post("/users", ...)
+    app.get("/users/:id", ...)
 
     app.get("/products", ...)
     app.post("/products", ...)
