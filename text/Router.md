@@ -1,3 +1,17 @@
+# Router
+
+Routing refers to determining how an application responds to a client request to a particular endpoint.
+Each route can have one or more handler functions, which are executed when the route is matched.
+Route definition takes the following structure:
+```js
+    app.METHOD(PATH, HANDLER);
+```
+Where:
+* `app` is an instace of `express`.
+* `METHOD` is an HTTP request method (in lowercase).
+* `PATH` is a path on the server.
+* `HANDLER` is the function executed when the route is matched.
+
 Express.Router() is a modular, mountable route handler.
 Express Router lets you split routes into separate files.
 
@@ -29,7 +43,7 @@ module.exports = router;
 app.js
 ```javascript
 const userRoutes = require("./user.routes");
-app.use("/user", userRoutes); // read as for any requests starting with /users, hand control to userRoutes
+app.use("/user", userRoutes); // read as: for any requests starting with /users, hand control to userRoutes
 ```
 Now:
 ```markdown
