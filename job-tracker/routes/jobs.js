@@ -5,7 +5,7 @@ const Job = require('../models/Job');
 
 router.get("/", async (req, res) => {
     try{
-        const jobs = await Job.find();
+        const jobs = await Job.find(req.query);
         return res.json(jobs);
     } catch(error){
         console.error(error);
@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try{
-        if(!req.body.company || !req.body.status) return res.status(400).json({"message": "Company or Status missing"});
+        if(!req.body.company?.trim() || !req.body.status?.trim()) return res.status(400).json({"message": "Company or Status missing"});
 
         const newJob = await Job.create({
             "company": req.body.company,
