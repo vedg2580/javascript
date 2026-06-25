@@ -6,7 +6,10 @@ const Job = require('../models/Job');
 
 router.get("/", auth, async (req, res) => {
     try{
-        const jobs = await Job.find(req.query);
+        const jobs = await Job.find({
+            "user": req.user.userId,
+            ...req.query
+        });
         return res.json(jobs);
     } catch(error){
         console.error(error);
@@ -17,7 +20,10 @@ router.get("/", auth, async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
     try{
         const jobId = req.params.id;
-        const job = await Job.findById(jobId);
+        const job = await Job.findOne({
+            "_id": jobId,
+            "user": req.user.userId
+        });
         if(!job) return res.status(404).json({"message": "Job not found"});
 
         return res.json(job);
@@ -33,7 +39,8 @@ router.post("/", auth, async (req, res) => {
 
         const newJob = await Job.create({
             "company": req.body.company,
-            "status": req.body.status
+            "status": req.body.status,
+            "user": req.user.userId
         });
 
         return res.status(201).json(newJob);
@@ -47,7 +54,10 @@ router.put("/:id", auth, async (req, res) => {
     try{
 
         const jobId = req.params.id;
-        const job = await Job.findById(jobId);
+        const job = await Job.findOne({
+            "_id": jobId,
+            "user": req.user.userId
+        });
         
         if(!job) return res.status(404).json({"message": "Job Id Not found"});
         
@@ -66,7 +76,10 @@ router.put("/:id", auth, async (req, res) => {
 router.delete("/:id", auth, async (req, res) => {
     try{
         const jobId = req.params.id;
-        const job = await Job.findByIdAndDelete(jobId);
+        const job = await Job.findOneAndDelete({
+            "_id": jobId,
+            "user": req.user.userId
+        });
         
         if(!job) return res.status(404).json({"message": "Job Id Not Found"});
         
