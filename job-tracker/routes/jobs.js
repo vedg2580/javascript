@@ -1,9 +1,10 @@
 const express = require('express');
+const auth = require("../middleware/auth");
 const router = express.Router();
 
 const Job = require('../models/Job');
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try{
         const jobs = await Job.find(req.query);
         return res.json(jobs);
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
     try{
         const jobId = req.params.id;
         const job = await Job.findById(jobId);
@@ -26,7 +27,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     try{
         if(!req.body.company?.trim() || !req.body.status?.trim()) return res.status(400).json({"message": "Company or Status missing"});
 
@@ -42,7 +43,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
     try{
 
         const jobId = req.params.id;
@@ -62,7 +63,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     try{
         const jobId = req.params.id;
         const job = await Job.findByIdAndDelete(jobId);

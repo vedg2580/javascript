@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -42,7 +43,13 @@ router.post('/login', async (req, res) => {
         const user = await User.findOne({"username": req.body.username});
         if(!user) return res.status(401).json({"message": "Invalid Combination"});
         const validPassword = await bcrypt.compare(req.body.password, user.password);
-        if(validPassword) return res.status(200).json({"message": "Login Successful"});
+        if(validPassword) {
+            const token = jwt.sign({
+                "userId": user._id,
+                "username": user.username
+            }, "THIS_SECRET_KEY_WILL_BE_IN_ENV_VARIABLES_IN_PRODUCTION_CODE");
+            return res.status(200).json({token, "message": "Login Successful"});
+        }
         return res.status(401).json({"message": "Invalid Combination"});
     } catch(error){
         console.error(error);
