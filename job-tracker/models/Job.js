@@ -12,6 +12,11 @@ const jobSchema = new mongoose.Schema({
         "required": true,
         "trim": true,
         "enum": JOB_STATUS
+    },
+    "user": {
+        "type": mongoose.Schema.Types.ObjectId,
+        "ref": "User",
+        "required": true
     }
 },
 {

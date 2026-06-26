@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+const config = require('./config');
 const connectDB = async () => {
     try {
-        await mongoose.connect("mongodb://127.0.0.1:27017/jobTracker");
+        await mongoose.connect(config.mongoUri);
         console.log("MongoDB connected");
     } catch(error){
         console.error(error);
+        throw error;
     }
 };
 
