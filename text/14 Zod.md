@@ -39,6 +39,7 @@ import
 
 Now we can use it like:
 `const nameSchema = z.string();`
+This means create a schema that accepts only strings.
 `nameSchema` expects a string.
 
 Now when we do `nameSchema.parse("Ved");` it returns success. But `nameSchema.parse(25);` throws an error.
@@ -187,3 +188,46 @@ Controllers shouldn't also become validators.
     Fail Fast Principle means detecting and rejecting invalid input as early as possible before expensive operations are performed.
 * Would you use parse() or safeParse() for an Express API?
     I prefer safeParse() because it returns a predictable result object, making API error handling simpler and avoiding exception-based control flow for expected validation failures.
+
+### string
+* `z.string()`: the value should be a string
+* `z.string().min(3).max(8)`: string of min 3 length and maximum 8 length
+* `z.string().length(10)`: exact length should be 10
+* `z.string().email()`: only allows email
+* `z.string().url()`: for url
+* `z.string().uuid()`: for uuid
+* `z.string().regex()`: custom patterns
+* `z.string().trim()`: trims trailing and leading spaces
+* `z.string().toLowerCase()`: converts string to **lowercase**
+* `z.string().toUpperCase()`: converts string to **UPPERCASE**
+
+### number
+* `z.number()`: value should be a number
+* `z.number().positive()`: the number should be > 0
+* `z.number().negative()`: the number should be < 0
+* `z.number().int()`: the number should be an **Integer**
+* `z.number().min(18).max(60)`: 18 <= number => 60
+
+### boolean
+* `z.boolean()`: allows only boolean values
+generally used for flags
+
+### object
+* `z.object({name: z.string(), age: z.number().max(100)})`: allows only objects
+
+### array
+* `z.array(z.string())`: allows only arrays of a certain datatype (in this case array of strings)
+
+### nullable
+* `z.string().nullable()`: allows null values
+
+### refine
+* `z.string().refine(...)`: It just means I have my own custom rule
+
+* **Imperative progamming**
+Imperative Programming describes how a task should be performed through explicit instructions
+example: `if`, `else`, `for`, `while`
+
+* **Declarative Programming**
+Declarative Programming describes what the desired outcome is without specifying every execution step
+example: sql, html, css, zod
