@@ -17,6 +17,21 @@ const jobSchema = new mongoose.Schema({
         "type": mongoose.Schema.Types.ObjectId,
         "ref": "User",
         "required": true
+    },
+    "emailUsed": {
+        "type": String,
+        "required": true,
+        "trim": true
+    },
+    "passwordRequired": {
+        "type": Boolean,
+        "required": true,
+        "default": false
+    },
+    "passwordUsed":{
+        "type": String,
+        "trim": true,
+        "required": false,
     }
 },
 {

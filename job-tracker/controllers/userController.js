@@ -4,16 +4,21 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 
 exports.getUsers = async (req, res) => {
-    const users = await User.find(req.query).select('-password');
+    const filters = {};
+
+    if(!!req.query.email) filters.email = req.query.email;
+    if(!!req.query.username) filters.username = req.query.username;
+    if(!!req.query.name) filters.name = req.query.name;
+
+    const users = await User.find(filters).select('-password');
     return res.json(users);
 };
 
 exports.signup = async (req, res) => {
-    if(!req.body.name?.trim() || !req.body.username?.trim() || !req.body.password?.trim()) return res.status(400).json({"message": "Missing data"});
-
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const newUser = await User.create({
         "name": req.body.name,
+        "email": req.body.email,
         "username": req.body.username,
         "password": hashedPassword
     });
@@ -26,7 +31,6 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-    if(!req.body.username || !req.body.password) return res.status(400).json({"message": "Missing Data"});
     const user = await User.findOne({"username": req.body.username});
     if(!user) return res.status(401).json({"message": "Invalid Combination"});
     const validPassword = await bcrypt.compare(req.body.password, user.password);
