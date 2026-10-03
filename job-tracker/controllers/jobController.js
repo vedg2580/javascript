@@ -1,9 +1,19 @@
 const Job = require('../models/Job');
 
 exports.getJobs = async (req, res) => {
+    const filters = {};
+
+    if(!!req.query.status) {
+        filters.status = req.query.status;
+    }
+
+    if(!!req.query.company) filters.company = req.query.company;
+
+    if(!!req.query.emailUsed) filters.emailUsed = req.query.emailUsed;
+
     const jobs = await Job.find({
-        "user": req.user.userId,
-        ...req.query
+        ...filters,
+        "user": req.user.userId
     });
     return res.json(jobs);
 };
@@ -20,18 +30,19 @@ exports.getJobById = async (req, res) => {
 };
 
 exports.createJob = async (req, res) => {
-    if(!req.body.company?.trim() || !req.body.status?.trim()) return res.status(400).json({"message": "Company or Status missing"});
-
     const newJob = await Job.create({
         "company": req.body.company,
         "status": req.body.status,
-        "user": req.user.userId
+        "user": req.user.userId,
+        "emailUsed": req.body.emailUsed,
+        "passwordRequired": req.body.passwordRequired,
+        "passwordUsed": req.body.passwordUsed
     });
 
     return res.status(201).json(newJob);
 };
 
-exports.updateJobById = async (req, res) => {
+exports.patchUpdateJobById = async (req, res) => {
     const jobId = req.params.id;
     const job = await Job.findOne({
         "_id": jobId,
@@ -40,8 +51,8 @@ exports.updateJobById = async (req, res) => {
     
     if(!job) return res.status(404).json({"message": "Job Id Not found"});
     
-    if(req.body.company) job.company = req.body.company;
-    if(req.body.status) job.status = req.body.status;
+    if(!!req.body.company) job.company = req.body.company;
+    if(!!req.body.status) job.status = req.body.status;
 
     await job.save();
 

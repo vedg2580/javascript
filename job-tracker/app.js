@@ -8,6 +8,8 @@ app.use(express.json());
 const jobRoutes = require('./routes/jobs');
 const userRoutes = require('./routes/users');
 
+// for all routes starting with the below endpoints use the corresponding routes file
+
 app.use("/jobs", jobRoutes);
 app.use("/users", userRoutes);
 

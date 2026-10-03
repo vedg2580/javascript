@@ -30,6 +30,7 @@ const jobSchema = new mongoose.Schema({
     },
     "passwordUsed":{
         "type": String,
+        "trim": true,
         "required": false,
     }
 },
