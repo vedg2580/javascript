@@ -1,7 +1,7 @@
 const { z } = require('zod');
 const JOB_STATUS = require('../utils/constants');
 
-const jobSchema = z.object({
+const JobSchema = z.object({
     "company": z.string().trim().min(1),
     "status": z.enum(JOB_STATUS),
     "emailUsed": z.email().trim(),
@@ -25,7 +25,7 @@ const jobSchema = z.object({
     }
 });
 
-const jobPatchSchema = z.object({
+const JobPatchSchema = z.object({
     "company": z.string().trim().min(1),
     "status": z.enum(JOB_STATUS),
     "emailUsed": z.email().trim(),
@@ -33,10 +33,10 @@ const jobPatchSchema = z.object({
     "passwordUsed": z.string().trim().min(1).optional()
 });
 
-const jobQuerySchema = z.object({
+const JobQuerySchema = z.object({
     "status": z.enum(JOB_STATUS).optional(),
     "company": z.string().trim().min(1).optional(),
     "emailUsed": z.email().optional()
 });
 
-module.exports = { jobSchema, jobPatchSchema, jobQuerySchema };
+module.exports = { JobSchema, JobPatchSchema, JobQuerySchema };
